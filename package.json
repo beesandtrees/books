@@ -1,0 +1,21 @@
+{
+  "name": "books-ive-read",
+  "description": "Some Books I've Read",
+  "version": "0.0.1",
+  "dependencies": {
+    "firebase": "^4.10.1",
+    "react": "15.5.3",
+    "react-dom": "15.5.3",
+    "react-firebase-file-uploader": "^2.4.1",
+    "react-router-dom": "^4.1.1"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
