@@ -7,8 +7,10 @@ class Home extends Component {
     super();
     this.state = {
       author: '',
+      authorLast: '',
       description:'',
       rating: '',
+      rated: '',
       ratingType: '',
       synopsis: '',
       title: '',
@@ -57,27 +59,32 @@ class Home extends Component {
 
     let book = {
       author: this.state.author,
+      authorLast: this.state.authorLast,
       description: this.state.description,
       rating: this.state.rating,
+      rated: this.state.rated,
       ratingType: this.state.ratingType,
       synopsis: this.state.synopsis,
       title: this.state.title,
       image: ''
-    }    
-    firebase.storage().ref().child(this.state.image)
-      .getDownloadURL()
-      .then((url) => {
-          // URL of the image uploaded on Firebase storage
-          alert(url);
-          book.image = url;
-          this.setState({ imageURL: url });
-          booksRef.push(book);
-      });
-    
+    }
+    if(this.state.image){    
+      firebase.storage().ref().child(this.state.image)
+        .getDownloadURL()
+        .then((url) => {
+            // URL of the image uploaded on Firebase storage
+            alert(url);
+            book.image = url;
+            this.setState({ imageURL: url });
+            booksRef.push(book);
+        });
+    }
     this.setState({
       author: '',
+      authorLast: '',
       description:'',
       rating: '',
+      rated: '',
       ratingType: '',
       synopsis: '',
       title: '',
@@ -130,7 +137,9 @@ class Home extends Component {
                   <form onSubmit={this.handleSubmit}>
                     <input type="text" name="title" placeholder="Book Title" onChange={this.handleChange} value={this.state.title} />
                     <input type="text" name="author" placeholder="Author" onChange={this.handleChange} value={this.state.author} />
+                    <input type="text" name="authorLast" placeholder="Author Last Name" onChange={this.handleChange} value={this.state.authorLast} />
                     <input type="text" name="rating" placeholder="Rating" onChange={this.handleChange} value={this.state.rating} />
+                    <input type="text" name="rated" placeholder="Rating Out Of..." onChange={this.handleChange} value={this.state.rated} />
                     <input type="text" name="ratingType" placeholder="Rating Type" onChange={this.handleChange} value={this.state.ratingType} />
                     <input type="text" name="synopsis" placeholder="Synopsis" onChange={this.handleChange} value={this.state.synopsis} />
                     <textarea name="description" placeholder="Description" onChange={this.handleChange} value={this.state.description} />

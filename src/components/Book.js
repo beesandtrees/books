@@ -22,7 +22,8 @@ class Home extends Component {
       backgroundColor: this.randomColor(),
       color: this.props.match.params.color,
       description: '',
-      rating: '1/1',
+      rating: 1,
+      rated: 1,
       ratingType: '',
       title: '',
       imageURL: ''
@@ -43,6 +44,7 @@ class Home extends Component {
         description: book.description,
         imageURL: book.image,
         rating: book.rating,
+        rated: book.rated,
         ratingType: book.ratingType,
         title: book.title
       });
@@ -63,7 +65,7 @@ class Home extends Component {
                 <div className='books'>
                   <div className='book' key={this.state.id}>
                     <div className={'rating ' + this.state.color}>
-                      <p>{this.state.rating}</p>
+                      <p>{this.state.rating}/{this.state.rated}</p>
                       <span>{this.state.ratingType}</span>
                     </div>
                     <div>
