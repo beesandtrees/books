@@ -124,9 +124,9 @@ class Home extends Component {
           <section className='display-book'>
               <div className='wrapper'>
                 <div className='row'>
-                  <div className='col-25'>
+                  <div className='col-33'>
                     <div className='row'>
-                      <div className='col-50'>
+                      <div className='col'>
                         <label>Sort by:</label>
                         <select name='sortType' value={this.state.sortType} onChange={this.handleSelect}>
                           <option value="authorLast">Author</option>
@@ -135,16 +135,16 @@ class Home extends Component {
                           <option value="title">Title</option>
                         </select>
                       </div>
-                      <div className='col-50'>
+                      <div className='col'>
                         <label>Sort order:</label>
                         <select name='reversed' value={this.state.reversed} onChange={this.handleSelect}>
-                          <option value="ascending">Ascending</option>
-                          <option value="descending">Descending</option>
+                          <option value="ascending">A-Z 0-9 &uarr;</option>
+                          <option value="descending">Z-A 9-0 &darr;</option>
                         </select>
                       </div>     
                     </div>               
                   </div>
-                  <div className='col-75'>
+                  <div className='col-66'>
                     <label htmlFor='filterby'>Filter Results by {filterlabel}:</label>
                     <input type="text" name="listFilter" placeholder="In Sear..." onChange={this.handleChange} value={this.state.listFilter} />
                   </div>                  

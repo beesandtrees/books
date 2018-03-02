@@ -13,7 +13,7 @@ import firebase from './../api.js';
 //   }
 // }
 
-class Home extends Component {
+class Book extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -82,4 +82,4 @@ class Home extends Component {
     );
   }
 }
-export default Home;
+export default Book;

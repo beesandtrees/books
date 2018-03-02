@@ -1,6 +1,29 @@
 import React, { Component } from 'react';
 import firebase, { auth, provider } from './../api.js';
-import FileUploader from 'react-firebase-file-uploader';
+
+/* THIS IS ALL FILE UPLOAD STUFF */
+// import FileUploader from 'react-firebase-file-uploader';
+
+/* INCLUDE THIS IN THE COMPONENNT */
+// <FileUploader
+//   accept="image/*"
+//   name="image"
+//   filename={file => this.state.title.split(' ')
+//     .join('').replace(/[.,/#!$%^&*;:{}=\-_~()]/g,"")
+//     .replace(/\s{2,}/g," ")
+//     .toLowerCase() + file.name.split('.')[1]}
+//   storageRef={firebase.storage().ref()}
+//   onUploadStart={this.handleUploadStart}
+//   onUploadError={this.handleUploadError}
+//   onUploadSuccess={this.handleUploadSuccess}
+//   onProgress={this.handleProgress}
+// /> 
+// {this.state.isUploading &&
+//   <p>Progress: {this.state.progress}</p>
+// }
+// {this.state.imageURL &&
+//   <img src={this.state.imageURL} alt={this.state.title} />
+// } 
 
 class Home extends Component {
   constructor() {
@@ -68,17 +91,19 @@ class Home extends Component {
       title: this.state.title,
       image: ''
     }
-    if(this.state.image){    
-      firebase.storage().ref().child(this.state.image)
-        .getDownloadURL()
-        .then((url) => {
-            // URL of the image uploaded on Firebase storage
-            alert(url);
-            book.image = url;
-            this.setState({ imageURL: url });
-            booksRef.push(book);
-        });
-    }
+    /* FILE UPLOAD */
+    // firebase.storage().ref().child(this.state.image)
+    //   .getDownloadURL()
+    //   .then((url) => {
+    //       // URL of the image uploaded on Firebase storage
+    //       alert(url);
+    //       book.image = url;
+    //       this.setState({ imageURL: url });
+    //       booksRef.push(book);
+    //   });
+    // This should be moved into the Image upload if 
+    // image upload is turned back on
+    booksRef.push(book);
     this.setState({
       author: '',
       authorLast: '',
@@ -130,47 +155,26 @@ class Home extends Component {
             </div>
         </header>
         {this.state.user && username.email === 'mcmurtrie37@gmail.com' ?
-          <div className='container'>
-            <section className='add-book wrapper'>
+          <section className='add-book wrapper text_right'>
+            <form onSubmit={this.handleSubmit}>
               <div className='row'>
                 <div className='col-50'>
-                  <form onSubmit={this.handleSubmit}>
-                    <input type="text" name="title" placeholder="Book Title" onChange={this.handleChange} value={this.state.title} />
-                    <input type="text" name="author" placeholder="Author" onChange={this.handleChange} value={this.state.author} />
-                    <input type="text" name="authorLast" placeholder="Author Last Name" onChange={this.handleChange} value={this.state.authorLast} />
-                    <input type="text" name="rating" placeholder="Rating" onChange={this.handleChange} value={this.state.rating} />
-                    <input type="text" name="rated" placeholder="Rating Out Of..." onChange={this.handleChange} value={this.state.rated} />
-                    <input type="text" name="ratingType" placeholder="Rating Type" onChange={this.handleChange} value={this.state.ratingType} />
-                    <input type="text" name="synopsis" placeholder="Synopsis" onChange={this.handleChange} value={this.state.synopsis} />
-                    <textarea name="description" placeholder="Description" onChange={this.handleChange} value={this.state.description} />
-                    <FileUploader
-                      accept="image/*"
-                      name="image"
-                      filename={file => this.state.title.split(' ')
-                        .join('').replace(/[.,/#!$%^&*;:{}=\-_~()]/g,"")
-                        .replace(/\s{2,}/g," ")
-                        .toLowerCase() + file.name.split('.')[1]}
-                      storageRef={firebase.storage().ref()}
-                      onUploadStart={this.handleUploadStart}
-                      onUploadError={this.handleUploadError}
-                      onUploadSuccess={this.handleUploadSuccess}
-                      onProgress={this.handleProgress}
-                    />               
-                    <button>Add book</button>
-                  </form>
-                  {this.state.isUploading &&
-                    <p>Progress: {this.state.progress}</p>
-                  }
-                  {this.state.imageURL &&
-                    <img src={this.state.imageURL} alt={this.state.title} />
-                  }    
+                  <input type="text" name="title" placeholder="Book Title" onChange={this.handleChange} value={this.state.title} />
+                  <input type="text" name="author" placeholder="Author" onChange={this.handleChange} value={this.state.author} />
+                  <input type="text" name="authorLast" placeholder="Author Last Name" onChange={this.handleChange} value={this.state.authorLast} />
+                  <input type="text" name="rating" placeholder="Rating" onChange={this.handleChange} value={this.state.rating} />
+                  <input type="text" name="rated" placeholder="Rating Out Of..." onChange={this.handleChange} value={this.state.rated} />
+                  <input type="text" name="ratingType" placeholder="Rating Type" onChange={this.handleChange} value={this.state.ratingType} />   
                 </div>
-                <div className='col-50'>                               
-                  <a className='see-all' href="/">Back to Book List</a>                            
+                <div className='col-50'> 
+                  <input type="text" name="synopsis" placeholder="Synopsis" onChange={this.handleChange} value={this.state.synopsis} />
+                  <textarea name="description" placeholder="Description" onChange={this.handleChange} value={this.state.description} />              
+                  <button>Add book</button>
                 </div>
               </div>
-            </section>
-          </div>
+            </form>
+            <a className='see-all' href="/">Back to Book List</a>                            
+          </section>
         :
           <div></div>
         }

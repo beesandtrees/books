@@ -239,8 +239,12 @@ input::-moz-focus-inner {
   padding: 0;
 }
 
-form {
-  max-width: 570px;
+form .col-50 {
+  padding: 0 0 0 2rem;
+}
+
+form .col-50:first-child {
+  padding-left: 0;
 }
 
 input {
@@ -271,23 +275,9 @@ input[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
-fieldset {
-  border: 1px solid #c0c0c0;
-  margin: 0 2px;
-  padding: 0.35em 0.625em 0.75em;
-}
-
-legend {
-  border: 0;
-  padding: 0;
-}
-
 textarea {
   overflow: auto;
-}
-
-optgroup {
-  font-weight: bold;
+  min-height: 27.5rem;
 }
 
 *:focus {
@@ -299,6 +289,12 @@ select {
   display: block;
 }
 
+select {
+  margin-bottom: 1rem;
+  max-width: 200px;
+  width: 90%;
+}
+
 textarea {
   overflow: auto;
   vertical-align: top;
@@ -307,17 +303,7 @@ textarea {
 textarea,
 input[type="text"],
 input[type="password"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="date"],
-input[type="month"],
-input[type="time"],
-input[type="week"],
-input[type="number"],
-input[type="email"],
-input[type="url"],
-input[type="search"],
-input[type="tel"] {
+input[type="search"] {
   width: 100%;
   border: 1px solid #8b6dce;
   margin-bottom: 2rem;
@@ -327,17 +313,7 @@ input[type="tel"] {
 textarea:focus,
 input[type="text"]:focus,
 input[type="password"]:focus,
-input[type="datetime"]:focus,
-input[type="datetime-local"]:focus,
-input[type="date"]:focus,
-input[type="month"]:focus,
-input[type="time"]:focus,
-input[type="week"]:focus,
-input[type="number"]:focus,
-input[type="email"]:focus,
-input[type="url"]:focus,
-input[type="search"]:focus,
-input[type="tel"]:focus {
+input[type="search"]:focus{
   border-color: #8b6dce;
 }
 
@@ -353,6 +329,10 @@ button {
   background: #24092B;
   color: white;
   padding: 8px 34px;
+}
+
+form button {
+  margin-bottom: 2rem;
 }
 
 /* Tables
@@ -563,6 +543,10 @@ footer a:hover {
     flex: none;
   }
 
+  .row .col {
+    flex: 1;
+  }
+
   .col-100 {
     width: 100%;
   }
@@ -626,6 +610,7 @@ footer a:hover {
 .card h3 {
   display: inline-block;
   font-family: 'Playfair Display', serif;
+  line-height: 1.4;
 }
 
 .card a {
