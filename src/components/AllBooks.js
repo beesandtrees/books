@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import firebase from './../api.js';
 
+import Hero from './parts/Hero';
+
 class Home extends Component {
   constructor() {
     super();
     this.state = {
       colors: ['pink', 'blue', 'teal', 'gold', 'purple'],
-      sortType: 'title',
+      sortType: 'id',
       listFilter: '',
-      reversed: 'ascending',
+      reversed: 'descending',
+      booksCount: 0,
       books: [],
       allBooks: []
     }
@@ -23,7 +26,8 @@ class Home extends Component {
     return rand;
   }
   componentDidMount() {
-    const booksRef = firebase.database().ref('books').orderByChild('title');
+    const booksRef = firebase.database().ref('books').orderByChild('id');
+    let booksCount = 0;
     booksRef.on('value', (snapshot) => {
       // let books = snapshot.val();
       let newState = [];
@@ -31,9 +35,15 @@ class Home extends Component {
         var key = childSnapshot.key;
         var childData = childSnapshot.val();
         childData.id = key;
-        newState.push(childData);
+        if(key === 'bookcount') {
+          booksCount = childData.value;
+        } else {
+          newState.push(childData);          
+        }
       });
+      newState.reverse();
       this.setState({
+        booksCount: booksCount,
         books: newState,
         allBooks: newState
       });
@@ -41,7 +51,7 @@ class Home extends Component {
   }
   reorderBooks(type, value) {
     let booksRef = firebase.database().ref('books').orderByChild(value);
-    // booksRef = JSON.parse(booksRef);
+    // booksRef = JSON.parse(booksRef); .limitToLast(16)
     // Object.keys(booksRef).reverse();
     booksRef.on('value', (snapshot) => {
       // let books = snapshot.val();
@@ -50,7 +60,9 @@ class Home extends Component {
         var key = childSnapshot.key;
         var childData = childSnapshot.val();
         childData.id = key;
-        newState.push(childData);
+        if(key !== 'bookcount') {
+          newState.push(childData);          
+        }
       });
 
       if(value === 'rating') {
@@ -114,15 +126,11 @@ class Home extends Component {
     let filterlabel = SortOptions[this.state.sortType];
     return (
       <div className='app'>
-        <header className='hero hero--mini purple'>
-            <div className='wrapper'>
-              <h1>Some Books I've Read</h1> 
-              <h2>Super Short Book Reviews</h2>              
-            </div>
-        </header>
+        <Hero color="purple" h1="Some Books I've Read" h2="Super Short Book Reviews" />
         <div className='container'>
           <section className='display-book'>
               <div className='wrapper'>
+                <p>{this.state.booksCount} (added to the list so far)</p>
                 <div className='row'>
                   <div className='col-33'>
                     <div className='row'>
@@ -155,11 +163,11 @@ class Home extends Component {
                       <div className='card' key={book.id}>
                         <p className={'rating ' + this.state.colors[index%5]}>{book.rating}/{book.rated} <span>{book.ratingType}</span></p>
                         <div className='content'>
-                          <h3><a href={"books/" + book.id}>{book.title}</a></h3>
+                          <h3><a href={'books/' + book.id + '/' + this.state.colors[index%5]}>{book.title}</a></h3>
                           <p className='author'>by: {book.author}</p>
                           <p className='synopsis'>{book.synopsis}</p>
                         </div>
-                        <a className='read-more' href={'books/' + book.id + '/' + this.state.colors[index%5]}>Read More</a>
+                        <a className='read-more' href={'books/' + book.id + '/' + this.state.colors[index%5]}>Read More</a>                      
                       </div>
                     )
                   })}

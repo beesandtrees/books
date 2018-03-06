@@ -1,32 +1,25 @@
 import React, { Component } from 'react';
-import firebase from './../api.js';
+import firebase, { auth } from './../api.js';
 
-// const BookImage = props => {
-//   if(props.imageURL) {
-//     return (
-//       <img src={props.imageURL} alt={props.title} />
-//     )
-//   } else {
-//     return (
-//       <span></span>
-//     )    
-//   }
-// }
+import Hero from './parts/Hero';
 
 class Book extends Component {
   constructor(props) {
     super(props);
+    console.log(this.props.match.params.bookid);
     this.state = {
       id: this.props.match.params.bookid,
       author: '',
       backgroundColor: this.randomColor(),
       color: this.props.match.params.color,
       description: '',
+      synopsis: '',
       rating: 1,
       rated: 1,
       ratingType: '',
       title: '',
-      imageURL: ''
+      imageURL: '',
+      loggedin: ''
     }
   }
   randomColor() {
@@ -35,13 +28,21 @@ class Book extends Component {
     return rand;
   }  
   componentDidMount() {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ 
+          user: user,
+          loggedin: true 
+        });
+      } 
+    });    
     const booksRef = firebase.database().ref('books/' + this.state.id);
-    booksRef.on('value', (snapshot) => {
+    booksRef.once('value', (snapshot) => {
       let book = snapshot.val();
       this.setState({
-        id: book.id,
         author: book.author,
         description: book.description,
+        synopsis: book.synopsis,
         imageURL: book.image,
         rating: book.rating,
         rated: book.rated,
@@ -53,12 +54,7 @@ class Book extends Component {
   render() {
     return (
       <div className='app'>
-        <header className={'hero hero--mini ' + this.state.color}>
-            <div className='wrapper'>
-              <h1>A Book I Read</h1> 
-              <h2>{this.state.title}</h2>              
-            </div>
-        </header>
+        <Hero color={this.state.color} h1="A Book I Read" h2={this.state.title} />
         <div className='container'>
           <section className='display-book'>
               <div className='wrapper'>
@@ -70,11 +66,20 @@ class Book extends Component {
                     </div>
                     <div>
                       <p className='author'>{this.state.author}</p>
+                      {this.state.description ?
                       <p className='description'>{this.state.description}</p>
+                      :
+                      <p className='description'>{this.state.synopsis}</p>
+                      }                      
                     </div>
                   </div>
                 </div>
-                <a className='see-all' href="/">Back to Book List</a>                
+                <a className='see-all' href="/">Back to Book List</a>  
+                {this.state.user && this.state.user.email === 'mcmurtrie37@gmail.com' ?
+                  <a className='see-all' href={"/edit-book/" + this.state.id}>Edit Book</a>
+                :
+                  <span></span>
+                }              
               </div>
           </section>
         </div>

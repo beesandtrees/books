@@ -416,8 +416,16 @@ header a {
   text-transform: uppercase;
 }
 
-header a:hover {
-  color: #8b6dce;
+header h1 a {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-size: 4rem;
+  margin-top: 1.6rem;
+  text-decoration: none;
+  text-transform: none;
+}
+
+header h1 a:hover {
+  color: #673ab7;
 }
 
 .site-header.active {
@@ -506,6 +514,11 @@ header a:hover {
   max-width: 1440px;
   width: 93%;
   margin: 0 auto;
+}
+
+.see-all {
+  display: block;
+  margin-bottom: 2rem;
 }
 
 footer {
@@ -597,7 +610,6 @@ footer a:hover {
   }
 }
 
-
 .card:nth-child(3n + 1),
 .card:first-child {
   margin-left: 0;
@@ -629,7 +641,7 @@ footer a:hover {
   line-height: 1rem;
   margin: 0 1rem 0 0;
   min-height: 8.4rem;
-  padding: 2rem 1rem 1.6rem;
+  padding: 2rem 0 1.6rem;
   text-align: center;
   width: 6.8rem;
 }

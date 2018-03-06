@@ -1,34 +1,11 @@
 import React, { Component } from 'react';
-import firebase, { auth, provider } from './../api.js';
+import firebase, { auth } from './../api.js';
 
-/* THIS IS ALL FILE UPLOAD STUFF */
-// import FileUploader from 'react-firebase-file-uploader';
-
-/* INCLUDE THIS IN THE COMPONENNT */
-// <FileUploader
-//   accept="image/*"
-//   name="image"
-//   filename={file => this.state.title.split(' ')
-//     .join('').replace(/[.,/#!$%^&*;:{}=\-_~()]/g,"")
-//     .replace(/\s{2,}/g," ")
-//     .toLowerCase() + file.name.split('.')[1]}
-//   storageRef={firebase.storage().ref()}
-//   onUploadStart={this.handleUploadStart}
-//   onUploadError={this.handleUploadError}
-//   onUploadSuccess={this.handleUploadSuccess}
-//   onProgress={this.handleProgress}
-// /> 
-// {this.state.isUploading &&
-//   <p>Progress: {this.state.progress}</p>
-// }
-// {this.state.imageURL &&
-//   <img src={this.state.imageURL} alt={this.state.title} />
-// } 
-
-class AddBook extends Component {
-  constructor() {
-    super();
+class EditBook extends Component {
+  constructor(props) {
+    super(props);
     this.state = {
+      id: this.props.match.params.bookid,
       author: '',
       authorLast: '',
       description:'',
@@ -45,41 +22,16 @@ class AddBook extends Component {
       user: null      
     }
     this.handleChange = this.handleChange.bind(this);
-    this.handleUploadStart = this.handleUploadStart.bind(this);
-    this.handleProgress = this.handleProgress.bind(this);  
-    this.handleUploadError = this.handleUploadError.bind(this);
-    this.handleUploadSuccess = this.handleUploadSuccess.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-
-    this.login = this.login.bind(this);
-    this.logout = this.logout.bind(this);
   }
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value
     });
-  }
-  handleUploadStart() {
-    this.setState({ 
-        isUploading: true, 
-        progress: 0 
-    });
-  }
-  handleProgress(progress) {
-    this.setState({ progress });
-  }
-  handleUploadError(error) {
-    this.setState({ 
-      isUploading: false 
-    });
-    console.error(error);
-  }
-  handleUploadSuccess(filename) {
-    this.setState({ image: filename, progress: 100, isUploading: false });
-  }  
+  } 
   handleSubmit(e) {
     e.preventDefault();
-    const booksRef = firebase.database().ref('books');
+    const booksRef = firebase.database().ref('books/' + this.state.id);
 
     let book = {
       author: this.state.author,
@@ -93,29 +45,13 @@ class AddBook extends Component {
       image: ''
     }
 
-    if(!book.rating) {
-      book.ratingType = 'Not Yet Rated';
-    }
-    /* FILE UPLOAD */
-    // firebase.storage().ref().child(this.state.image)
-    //   .getDownloadURL()
-    //   .then((url) => {
-    //       // URL of the image uploaded on Firebase storage
-    //       alert(url);
-    //       book.image = url;
-    //       this.setState({ imageURL: url });
-    //       booksRef.push(book);
-    //   });
-    // This should be moved into the Image upload if 
-    // image upload is turned back on
-
     // Write the new post's data simultaneously in the posts list and the user's post list.
     var updates = {};
     updates['/bookcount/value'] = this.state.uppercount + 1;
 
     booksRef.update(updates);
 
-    booksRef.push(book);
+    booksRef.update(book);
     this.setState({
       author: '',
       authorLast: '',
@@ -128,23 +64,6 @@ class AddBook extends Component {
       image: '',
       uppercount: this.state.uppercount + 1
     });
-  }
-  logout() {
-    auth.signOut()
-      .then(() => {
-        this.setState({
-          user: null
-        });
-      });
-  }
-  login() {
-    auth.signInWithPopup(provider) 
-      .then((result) => {
-        const user = result.user;
-        this.setState({
-          user
-        });
-      });
   }
   componentDidMount() {
     auth.onAuthStateChanged((user) => {
@@ -161,7 +80,22 @@ class AddBook extends Component {
       this.setState({
         uppercount: uppercount
       });
-    });    
+    }); 
+    const booksRef = firebase.database().ref('books/' + this.state.id);
+    booksRef.once('value', (snapshot) => {
+      let book = snapshot.val();
+      this.setState({
+        author: book.author,
+        authorLast: book.authorLast,
+        description: book.description,
+        synopsis: book.synopsis,
+        imageURL: book.image,
+        rating: book.rating,
+        rated: book.rated,
+        ratingType: book.ratingType,
+        title: book.title
+      });
+    });   
   }
   render() {
     let username = this.state.user;
@@ -169,12 +103,8 @@ class AddBook extends Component {
       <div className='app'>
         <header className='hero hero--mini teal'>
             <div className='wrapper'>
-              <h1>A Book I'm Adding</h1>               
-             {this.state.user ?
-                <button onClick={this.logout}>Log Out</button>                
-                :
-                <button onClick={this.login}>Log In</button>              
-              }
+              <h1>A Book I'm Editing</h1>               
+              <h2>{this.state.title} </h2>              
             </div>
         </header>
         {this.state.user && username.email === 'mcmurtrie37@gmail.com' ?
@@ -192,7 +122,7 @@ class AddBook extends Component {
                 <div className='col-50'> 
                   <input type="text" name="synopsis" placeholder="Synopsis" onChange={this.handleChange} value={this.state.synopsis} />
                   <textarea name="description" placeholder="Description" onChange={this.handleChange} value={this.state.description} />              
-                  <button>Add book</button>
+                  <button>Update book</button>
                 </div>
               </div>
             </form>
@@ -205,4 +135,4 @@ class AddBook extends Component {
     );
   }
 }
-export default AddBook;
+export default EditBook;

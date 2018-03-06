@@ -2,6 +2,7 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import Home from './AllBooks'
 import AddBooks from './AddBooks'
+import EditBook from './EditBook'
 import Book from './Book'
 
 // The Main component renders one of the three provided
@@ -13,7 +14,8 @@ const Main = () => (
   <main>
     <Switch>
       <Route exact path='/' component={Home}/>
-      <Route path='/obscure-path-for-adding-books' component={AddBooks}/>
+      <Route path='/add-book' component={AddBooks}/>
+      <Route path='/edit-book/:bookid' component={EditBook}/>
       <Route path='/books/:bookid/:color' component={Book}/>
     </Switch>
   </main>
