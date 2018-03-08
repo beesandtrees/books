@@ -8,6 +8,8 @@ class EditBook extends Component {
       id: this.props.match.params.bookid,
       author: '',
       authorLast: '',
+      colors: ['pink', 'blue', 'teal', 'gold', 'purple'],
+      color: Math.floor(Math.random() * 5),
       description:'',
       rating: '',
       rated: '',
@@ -127,6 +129,7 @@ class EditBook extends Component {
               </div>
             </form>
             <a className='see-all' href="/">Back to Book List</a>                            
+            <a className='see-all' href={'/books/' + this.state.id + '/' + this.state.colors[this.state.color]}>View Book</a>                            
           </section>
         :
           <div></div>

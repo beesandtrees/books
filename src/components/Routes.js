@@ -1,6 +1,7 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import Home from './AllBooks'
+import Login from './Login'
 import AddBooks from './AddBooks'
 import EditBook from './EditBook'
 import Book from './Book'
@@ -10,15 +11,16 @@ import Book from './Book'
 // and /schedule routes will match any pathname that starts
 // with /roster or /schedule. The / route will only match
 // when the pathname is exactly the string "/"
-const Main = () => (
+const Routes = () => (
   <main>
     <Switch>
       <Route exact path='/' component={Home}/>
-      <Route path='/add-book' component={AddBooks}/>
+      <Route exact path='/login' component={Login}/>
+      <Route exact path='/add-book' component={AddBooks}/>
       <Route path='/edit-book/:bookid' component={EditBook}/>
       <Route path='/books/:bookid/:color' component={Book}/>
     </Switch>
   </main>
 )
 
-export default Main
+export default Routes

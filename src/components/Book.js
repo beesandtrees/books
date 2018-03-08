@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import firebase, { auth } from './../api.js';
 
-import Hero from './parts/Hero';
+import Hero from './elements/Hero';
 
 class Book extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props.match.params.bookid);
     this.state = {
       id: this.props.match.params.bookid,
       author: '',
@@ -14,10 +13,10 @@ class Book extends Component {
       color: this.props.match.params.color,
       description: '',
       synopsis: '',
-      rating: 1,
-      rated: 1,
-      ratingType: '',
-      title: '',
+      rating: '',
+      rated: '',
+      ratingType: 'Flying Monkeys',
+      title: 'Title',
       imageURL: '',
       loggedin: ''
     }

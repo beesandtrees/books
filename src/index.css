@@ -23,8 +23,11 @@ body {
   margin-bottom: 7rem;
 }
 
+
+
 /* HTML5 display definitions
    ========================================================================== */
+
 article,
 aside,
 details,
@@ -58,8 +61,11 @@ template {
   display: none;
 }
 
+
+
 /* Links
    ========================================================================== */
+
 a {
   background: transparent;
   color: #24092B;
@@ -129,12 +135,10 @@ small {
   font-size: 1rem;
 }
 
+
+
 /* Text-level semantics
    ========================================================================== */
-
-abbr[title] {
-  border-bottom: 1px dotted;
-}
 
 b,
 strong {
@@ -144,21 +148,8 @@ strong {
 small {
   font-size: 80%;
 }
-sub,
-sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-}
 
-sup {
-  top: -0.5em;
-}
 
-sub {
-  bottom: -0.25em;
-}
 
 /* Embedded content
   ========================================================================== */
@@ -169,34 +160,11 @@ img {
   max-width: 100%;
 }
 
-svg:not(:root) {
-  overflow: hidden;
-}
+
 
 /* Grouping content
    ========================================================================== */
 
-figure {
-  margin: 1em 40px;
-}
-
-hr {
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  height: 0;
-}
-
-pre {
-  overflow: auto;
-}
-
-code,
-kbd,
-pre,
-samp {
-  font-family: monospace, monospace;
-  font-size: 1em;
-}
 
 /* Forms
    ========================================================================== */
@@ -313,7 +281,7 @@ input[type="search"] {
 textarea:focus,
 input[type="text"]:focus,
 input[type="password"]:focus,
-input[type="search"]:focus{
+input[type="search"]:focus {
   border-color: #8b6dce;
 }
 
@@ -335,18 +303,7 @@ form button {
   margin-bottom: 2rem;
 }
 
-/* Tables
-   ========================================================================== */
 
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-td,
-th {
-  padding: 0;
-}
 
 /***** TYPOGRAPHY HELPERS ******/
 
@@ -361,6 +318,8 @@ th {
 .text_right {
   text-align: right;
 }
+
+
 
 /***** BUTTONS ******/
 
@@ -397,11 +356,17 @@ th {
   background-color: #B7B7B7;
 }
 
+
+
 /******** HEADER ********/
+
 header {
   color: #24092B;
   font-weight: 400;
+  left: 0;
   padding: 0 0 0.4rem 0;
+  position: fixed;
+  top: 0;
   width: 100%;
   z-index: 9;
 }
@@ -428,88 +393,11 @@ header h1 a:hover {
   color: #673ab7;
 }
 
-.site-header.active {
-  background: rgba(255, 255, 255, 0.8);
-}
 
-.site-header img {
-  transition: max-width 0.67s;
-}
 
-.site-header.scrolled {
-  background: rgba(255, 255, 255, 0.875);
-  box-shadow: 0 2px 5px 0px rgba(0, 0, 0, 0.05);
-  padding: 0;
-}
-
-.site-header.scrolled .site-logo {
-  padding: 0.6rem 0 0 0;
-}
-
-.site-header.scrolled .nav-main {
-  transform: translateY(11px);
-}
-
-.site-header.scrolled img {
-  max-width: 100px;
-}
-
-/*********** NAV ***********/
-.nav-main {
-  max-height: 0;
-  overflow: hidden;
-  text-align: left;
-  transition: all 0.33s ease;
-  vertical-align: top;
-}
-
-.nav-main.active {
-  max-height: 960px;
-  transform: translateY(0px);
-}
-
-@media (min-width: 960px) {
-  .nav-main {
-    display: inline-block;
-    max-height: 25vh;
-    width: 100%;
-    text-align: right;
-  }
-}
-
-.site-logo {
-  display: inline-block;
-  font-size: 2.4rem;
-  padding: 2rem 0 0 0;
-  transform: translateY(2px);
-  width: 33.33%;
-}
-
-@media (min-width: 960px) {
-  .site-logo {
-    padding: 2rem 0 0 0;
-  }
-}
-
-.nav-items {
-  display: inline-block;
-  list-style-type: none;
-  margin: 0;
-  padding: 0 0 2rem 0;
-}
-
-@media (min-width: 960px) {
-  .nav-items {
-    padding: 0;
-  }
-}
-
-.nav-item {
-  display: inline-block;
-  padding: 1rem 0 0.6rem 2rem;
-}
 
 /********** CONTENT ***********/
+
 .wrapper {
   max-width: 1440px;
   width: 93%;
@@ -540,7 +428,10 @@ footer a:hover {
   color: #b09b4c;
 }
 
+
+
 /************* GRID *************/
+
 @media (min-width: 768px) {
   .row {
     display: flex;
@@ -585,7 +476,10 @@ footer a:hover {
   }
 }
 
+
+
 /**********  CARDS *********/
+
 .card {
   background: #f0f0f0;
   box-shadow: 0 2px 6px 2px rgba(0, 0, 0, 0.1);
@@ -606,7 +500,7 @@ footer a:hover {
 
   .card {
     margin: 2rem 0 3rem 4rem;
-    width: calc(33% - 2.5rem);    
+    width: calc(33% - 2.5rem);
   }
 }
 
@@ -702,29 +596,40 @@ footer a:hover {
   margin: 0;
 }
 
+.display-book {
+  margin-top: 3vh;
+}
+
 /*********** HERO ***********/
+
 .hero {
-  align-items: center;
   background-position: center top;
   background-size: cover;
   color: #FFB128;
   display: flex;
-  justify-content: center;
   margin-bottom: 6rem;
   min-height: 100vh;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-height: 25vh;
+  align-items: flex-end;
+  justify-content: flex-end;
+  transition: min-height 0.33s;
 }
 
 .hero.text_left {
   background-position: 37% top;
 }
 
-.hero h1, .hero h2 {
+.hero h1,
+.hero h2 {
   color: #24092B;
   font-size: 2.8rem;
   font-weight: 400;
   margin: 0;
   padding: 0;
+  transition: all 0.33s;
 }
 
 .hero h2 {
@@ -738,14 +643,6 @@ footer a:hover {
   font-size: 2rem;
   font-weight: 400;
   margin-top: 0rem;
-}
-
-.hero a {
-  margin-top: 1rem;
-}
-
-.hero button {
-  transform: translateY(-8px);
 }
 
 .hero.black {
@@ -778,48 +675,27 @@ footer a:hover {
     background-position: center top;
   }
   .hero h1 {
-      display: inline-block;
-      font-size: 3.2rem;
-      margin-right: 3rem;
+    display: inline-block;
+    font-size: 3.2rem;
+    margin-right: 3rem;
   }
   .hero.text_left .hero_text {
     width: 80%;
   }
 }
 
-.hero_text {
-  padding-bottom: 6vh;
+.hero+.container {
+  padding-top: 30vh;
 }
 
-.hero--mini {
-  min-height: 25vh;
-  align-items: flex-end;
-  justify-content: flex-end;
+.hero.scrolled {
+  min-height: 10vh;
 }
 
-.hero--products {
-  padding-top: 50vh;
+.hero.scrolled h1 {
+  font-size: 1.6rem;
 }
 
-.hero--products .hero_text {
-  background: rgba(0, 0, 0, 0.6);
-  border-radius: 3px;
-  margin-bottom: 3rem;
-  padding: 2rem;
-}
-
-@media (min-width: 960px) {
-  .hero--products {
-    padding-top: 0;
-  }
-  .hero--products .hero_text {
-    background: transparent;
-    border-radius: 0;
-    margin-bottom: 3rem;
-    padding: 0;
-  }
-}
-
-.single .hero h1 {
-  font-size: 4.8rem;
+.hero.scrolled h2 {
+  font-size: 2rem;
 }

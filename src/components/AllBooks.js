@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import firebase from './../api.js';
 
-import Hero from './parts/Hero';
+import Hero from './elements/Hero';
 
 class Home extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
+      pathURL: this.props.match.path,
       colors: ['pink', 'blue', 'teal', 'gold', 'purple'],
       sortType: 'id',
       listFilter: '',
@@ -126,12 +127,16 @@ class Home extends Component {
     let filterlabel = SortOptions[this.state.sortType];
     return (
       <div className='app'>
-        <Hero color="purple" h1="Some Books I've Read" h2="Super Short Book Reviews" />
+        <Hero 
+          pathURL={this.state.pathURL}
+          color="purple" 
+          h1="Some Books I've Read" 
+          h2="Super Short Book Reviews" />
         <div className='container'>
-          <section className='display-book'>
+          <section>
               <div className='wrapper'>
                 <p>{this.state.booksCount} (added to the list so far)</p>
-                <div className='row'>
+                <div className='row filters'>
                   <div className='col-33'>
                     <div className='row'>
                       <div className='col'>
