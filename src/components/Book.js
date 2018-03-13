@@ -16,7 +16,7 @@ class Book extends Component {
       rating: '',
       rated: '',
       ratingType: 'Flying Monkeys',
-      title: 'Title',
+      title: this.props.match.params.booktitle,
       imageURL: '',
       loggedin: ''
     }

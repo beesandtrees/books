@@ -25,6 +25,7 @@ body {
 
 
 
+
 /* HTML5 display definitions
    ========================================================================== */
 
@@ -60,6 +61,7 @@ audio:not([controls]) {
 template {
   display: none;
 }
+
 
 
 
@@ -137,6 +139,7 @@ small {
 
 
 
+
 /* Text-level semantics
    ========================================================================== */
 
@@ -151,6 +154,7 @@ small {
 
 
 
+
 /* Embedded content
   ========================================================================== */
 
@@ -159,6 +163,7 @@ img {
   display: block;
   max-width: 100%;
 }
+
 
 
 
@@ -305,6 +310,7 @@ form button {
 
 
 
+
 /***** TYPOGRAPHY HELPERS ******/
 
 .text_center {
@@ -318,6 +324,7 @@ form button {
 .text_right {
   text-align: right;
 }
+
 
 
 
@@ -355,6 +362,7 @@ form button {
 .btn-disabled:hover {
   background-color: #B7B7B7;
 }
+
 
 
 
@@ -396,6 +404,7 @@ header h1 a:hover {
 
 
 
+
 /********** CONTENT ***********/
 
 .wrapper {
@@ -427,6 +436,7 @@ footer a {
 footer a:hover {
   color: #b09b4c;
 }
+
 
 
 
@@ -475,6 +485,7 @@ footer a:hover {
     width: 75%;
   }
 }
+
 
 
 
@@ -569,12 +580,21 @@ footer a:hover {
 }
 
 .book .rating {
-  float: left;
   height: 220px;
   margin-bottom: 3rem;
-  margin-right: 4rem;
+  margin-right: auto;
+  margin-left: auto;
   padding: 4rem 0;
   width: 220px;
+}
+
+@media(min-width: 960px) {
+
+  .book .rating {
+    float: left;
+    margin-right: 4rem;
+    margin-left: 0;
+  }
 }
 
 .book .rating p {
@@ -599,6 +619,7 @@ footer a:hover {
 .display-book {
   margin-top: 3vh;
 }
+
 
 /*********** HERO ***********/
 
@@ -635,7 +656,7 @@ footer a:hover {
 .hero h2 {
   color: white;
   font-family: Avenir, Helvetica, sans-serif;
-  font-size: 5.6rem;
+  font-size: 3.6rem;
 }
 
 .hero p {
@@ -678,6 +699,9 @@ footer a:hover {
     display: inline-block;
     font-size: 3.2rem;
     margin-right: 3rem;
+  }
+  .hero h2 {
+    font-size: 5.6rem;
   }
   .hero.text_left .hero_text {
     width: 80%;

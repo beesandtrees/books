@@ -8,15 +8,15 @@ class Hero extends Component {
     super(props);
     this.state = {
       color: this.props.color,
-      h1: this.props.h1,
-      h2: this.props.h2,
+      headerOne: this.props.h1,
+      headerTwo: this.props.h2,
       heroClasses: 'hero hero--mini ' + this.props.color
     }
 
     this.handleScroll = this.handleScroll.bind(this);
   } 
   componentDidMount() {
-	window.addEventListener('scroll', this.handleScroll);
+	  window.addEventListener('scroll', this.handleScroll);
   }
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
@@ -36,8 +36,8 @@ class Hero extends Component {
     return (
 	  <header className={this.state.heroClasses}>
 	    <div className='wrapper'>
-		    <h1>{this.state.h1}</h1> 
-		    <h2>{this.state.h2}</h2>       
+		    <h1>{this.state.headerOne}</h1> 
+		    <h2>{this.state.headerTwo}</h2>       
 	    </div>
 	  </header>	
     );

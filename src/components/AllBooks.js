@@ -168,11 +168,11 @@ class Home extends Component {
                       <div className='card' key={book.id}>
                         <p className={'rating ' + this.state.colors[index%5]}>{book.rating}/{book.rated} <span>{book.ratingType}</span></p>
                         <div className='content'>
-                          <h3><a href={'books/' + book.id + '/' + this.state.colors[index%5]}>{book.title}</a></h3>
+                          <h3><a href={'books/' + book.id + '/' + book.title + '/' + this.state.colors[index%5]}>{book.title}</a></h3>
                           <p className='author'>by: {book.author}</p>
                           <p className='synopsis'>{book.synopsis}</p>
                         </div>
-                        <a className='read-more' href={'books/' + book.id + '/' + this.state.colors[index%5]}>Read More</a>                      
+                        <a className='read-more' href={'books/' + book.id + '/' + book.title + '/' + this.state.colors[index%5]}>Read More</a>                      
                       </div>
                     )
                   })}
